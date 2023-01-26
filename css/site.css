@@ -4,6 +4,16 @@
     --dark-color: #292929;
     --white-color: #dff3e4;
 }
+.logoFont{
+    font-family: 'Orbitron', sans-serif;
+    font-style: italic;
+}
+.odd {
+    font-weight: 100;
+}
+.even{
+    font-weight: bold;
+}
 body{
     color:var(--dark-color);
 }

@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project by Kamen Randall</title>
+    <title>FizzBuzz: A Coding Project by Kamen Randall</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,14 +22,19 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="img/favicon-32x32.png">
+
+    <!-- Google Fonts for Logo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column h-100">
     <!-- Nav Section -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="img/android-chrome-512x512.png" class="d-inline-block align-text-top"
-                alt="Kamen Randall Logo" width="30" height="24"> APP NAME</a>
+            <a class="navbar-brand logoFont" href="#"><img src="img/android-chrome-512x512.png" class="d-inline-block align-text-top"
+                alt="Kamen Randall Logo" width="30" height="24"> FizzBuzz</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -62,17 +67,74 @@
             <div class="row row-cols-1 row-cols-md-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        // Call Hello World
-                        function HelloWorld(){
-                            alert("Hello World");
+                        //Get the values from the Page
+                        function getValues(){
+                            //Get values from page
+                            let startValue = document.getElementById("startValue").value;
+                            let endValue = document.getElementById("endValue").value;
+
+                            //We need to validate our input
+                            //Parse into Integers
+                            startValue = parseInt(startValue);
+                            endValue = parseInt(endValue);
+
+                            if (Number.isInteger(startValue) && Number.isInteger(endValue)){
+                                //Call generateNumbers
+                                let numbers = generateNumbers(startValue, endValue);
+                                //Call displayNumbers
+                                displayNumbers(numbers);
+                            } else {
+                                alert("You must enter integers");
+                            }
+
                         }
+
+                        //Generate numbers from the startValue to the endValue
+                        function generateNumbers(sValue, eValue){
+                            let numbers= [];
+
+                            //Get all numbers from start to end
+                            for (let i = sValue; i <= eValue; i++) {
+                            numbers.push(i);
+                            }
+                            return numbers;
+                        }
+
+                        //Display the numbers and mark the even numbers bold
+                        function displayNumbers(numbers){
+
+                            let templateRows = "";
+                            for(let i = 0; i < numbers.length; i++){
+                                let number = numbers[i];
+                                if(number != 0 && number % 3 == 0 && number % 5 == 0){
+                                    number = "FizzBuzz";
+                                } else if (number != 0 && number % 3 == 0) {
+                                    number = "Fizz";
+                                } else if (number != 0 && number % 5 == 0) {
+                                    number = "Buzz";
+                                }
+                                templateRows += `<tr><td>${number}</td></tr>`;
+                            }
+                            document.getElementById("results").innerHTML = templateRows;
+                        }
+
                     </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structured in one function</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World".</p>
+                    <p>The Code is structured in multiple functions</p>
+                    <h5>getValues()</h5>
+                    <p>The "getvalues" function receives the values from the two input fields on the App Page and assigns them the id's "startValue" and "endValue".
+                        It then converts the values from these inputs into integers using the "parseInt()" function.
+                        It then checks if these values are valid integers using the "Number.isInteger()" function.
+                        If they are valid integers, it calls another function called "generateNumbers" and passes in the start and end values as arguments. </p>
+                    <h5>generateNumbers(sValue, eValue)</h5>
+                    <p>The "generateNumbers" function takes in the start and end values and creates an empty array called "numbers". It then uses a for loop to push all the numbers from the start value to the end value into the array.
+                        The function then returns the array of numbers.
+                        The "getValues" function then calls another function called "displayNumbers" and passes in the array of numbers as an argument. </p>
+                    <h5>displayNumbers(numbers)</h5>
+                        The "displayNumbers" function takes in the array of numbers and uses a for loop to iterate through the array. It then checks if the current number is a multiple of 3 and 5, if so it replaces the number with the string "FizzBuzz", if the number is a multiple of 3 it replaces the number with the string "Fizz" and if it is multiple of 5 it replaces the number with the string "Buzz".
+                        It then takes the modified array and adds it to the HTML element with the id "results".</p>
                 </div>
             </div>
         </div>
